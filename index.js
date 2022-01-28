@@ -7,8 +7,10 @@ const app = express();
 
 app.use(cors());
 
-let API_URL =
-  "https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PLDoPjvoNmBAzH72MTPuAAaYfReraNlQgM&key=AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk";
+const API_KEY = "AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk";
+const playlistId = "PLDoPjvoNmBAxdiBh6J62wOzEnvC4CNuFU";
+
+let API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -24,7 +26,7 @@ let nextPageToken = "";
 
 const getAllVideos = async () => {
   try {
-    // if the playlist length is equal to or less than 50 it won't have a nextPageToken.
+    // if the playlist length is equal to or less than 50 it won't have a nextPageToken (undefined).
     while (nextPageToken !== undefined) {
       const response = await axios.get(API_URL);
       nextPageToken = response.data.nextPageToken;
@@ -32,7 +34,7 @@ const getAllVideos = async () => {
         videosIDs.push(item.contentDetails.videoId);
       });
       if (nextPageToken !== undefined) {
-        API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&pageToken=${nextPageToken}&maxResults=50&playlistId=PLDoPjvoNmBAzH72MTPuAAaYfReraNlQgM&key=AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk`;
+        API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&pageToken=${nextPageToken}&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
       }
     }
   } catch (err) {
@@ -47,7 +49,7 @@ let videosDurations = [];
 const getTotalDuration = async () => {
   let i = 0;
   while (i < videosIDs.length) {
-    let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs[i]}&key=AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk`;
+    let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs[i]}&key=${API_KEY}`;
 
     const response = await axios.get(API_URL);
     videosDurations.push(response.data.items[0].contentDetails.duration);
@@ -121,25 +123,25 @@ getAllVideos()
     const finalDays = totalMinutes / (24 * 60);
     const absoluteDays = Math.floor(finalDays);
 
-    console.log(absoluteDays);
+    console.log(absoluteDays, "Days");
 
     // Hours
     const finalHours = (finalDays - Math.floor(finalDays)) * 24;
     const absoluteHours = Math.floor(finalHours);
 
-    console.log(absoluteHours);
+    console.log(absoluteHours, "Hours");
 
     // Minutes
     const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
     const absoluteMinutes = Math.floor(finalMinutes);
 
-    console.log(absoluteMinutes);
+    console.log(absoluteMinutes, "Minutes");
 
     // Seconds
     const absoluteSeconds = Math.ceil(
       (finalMinutes - Math.floor(finalMinutes)) * 60
     );
 
-    console.log(absoluteSeconds);
+    console.log(absoluteSeconds, "Seconds");
     console.timeEnd();
   });
