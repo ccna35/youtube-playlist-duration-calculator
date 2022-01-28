@@ -37,6 +37,7 @@ const getAllVideos = async () => {
         API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&pageToken=${nextPageToken}&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
       }
     }
+    // console.log(videosIDs);
   } catch (err) {
     // Handle Error Here
     console.error(err);
@@ -47,16 +48,61 @@ let videosDurations = [];
 
 // Run the API again to obtain the duration of each video in the playlist.
 const getTotalDuration = async () => {
-  let i = 0;
-  while (i < videosIDs.length) {
-    let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs[i]}&key=${API_KEY}`;
-
-    const response = await axios.get(API_URL);
-    videosDurations.push(response.data.items[0].contentDetails.duration);
-
-    i++;
+  // calculating how many times this API will be called.
+  const numOfRounds =
+    videosIDs.length % 50 > 0
+      ? Math.floor(videosIDs.length / 50) + 1
+      : videosIDs.length / 50;
+  if (videosIDs.length <= 50) {
+    try {
+      let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs.join(
+        "%2C"
+      )}&maxResults=50&key=${API_KEY}`;
+      const response = await axios.get(API_URL);
+      response.data.items.map((item) => {
+        videosDurations.push(item.contentDetails.duration);
+      });
+      // console.log(videosDurations);
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  } else {
+    // amount of increment every time the API is called.
+    let increment = 50;
+    let start = 0;
+    for (let i = 0; i < numOfRounds; i++) {
+      if (numOfRounds - i === 1) {
+        increment = videosIDs.length;
+      }
+      try {
+        // 0, 50
+        // 50, 100
+        // 100, 128
+        let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs
+          .slice(start, increment)
+          .join("%2C")}&maxResults=50&key=${API_KEY}`;
+        const response = await axios.get(API_URL);
+        response.data.items.map((item) => {
+          videosDurations.push(item.contentDetails.duration);
+        });
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+      increment += 50;
+      start += 50;
+    }
+    // console.log(videosDurations);
   }
 };
+
+// getAllVideos()
+//   .then(getTotalDuration)
+//   .then(() => {
+//     console.log(videosDurations.length);
+//     console.time();
+//   });
 
 console.time();
 
