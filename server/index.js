@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const axios = require("axios");
 const cors = require("cors");
 const port = 8080;
@@ -9,7 +10,7 @@ app.use(cors());
 
 let data = {};
 
-const API_KEY = "AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk";
+const API_KEY = process.env.API_KEY;
 const playlistId = "PLDoPjvoNmBAy3siU1b04xY24ZlstofO9M";
 
 let API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
   res.send(data);
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log(`Example app listening on port ${port}`);
 });
 

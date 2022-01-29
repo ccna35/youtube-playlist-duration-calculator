@@ -20,13 +20,7 @@ export default function Home() {
             <input type="text" placeholder="youtube.com/playlist?list=ID" />
             <button type="button">Get Full Duration</button>
           </div>
-          <div>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi
-            numquam quam aliquam nobis totam! Aliquam maiores, deserunt labore
-            id iste sint delectus obcaecati ipsa et placeat vero ullam, nam
-            voluptates illo cumque alias. Commodi ratione, consequuntur officiis
-            quae earum libero!
-          </div>
+          <div>Lorem</div>
         </div>
       </main>
       <Footer />
