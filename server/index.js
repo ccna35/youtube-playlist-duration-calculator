@@ -1,19 +1,21 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-const port = 3000;
+const port = 8080;
 
 const app = express();
 
 app.use(cors());
 
+let data = {};
+
 const API_KEY = "AIzaSyBvs4W43v1kP4EuE0wER5wbM5Rlfi1LMjk";
-const playlistId = "PLDoPjvoNmBAxdiBh6J62wOzEnvC4CNuFU";
+const playlistId = "PLDoPjvoNmBAy3siU1b04xY24ZlstofO9M";
 
 let API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(data);
 });
 
 app.listen(port, () => {
@@ -161,8 +163,6 @@ getAllVideos()
 
     const totalMinutes = sumOfMinutes + daysToMin + hoursToMin + secToMin;
 
-    console.log(totalMinutes);
-
     // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
 
     // Days
@@ -170,18 +170,21 @@ getAllVideos()
     const absoluteDays = Math.floor(finalDays);
 
     console.log(absoluteDays, "Days");
+    data.days = absoluteDays;
 
     // Hours
     const finalHours = (finalDays - Math.floor(finalDays)) * 24;
     const absoluteHours = Math.floor(finalHours);
 
     console.log(absoluteHours, "Hours");
+    data.hours = absoluteHours;
 
     // Minutes
     const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
     const absoluteMinutes = Math.floor(finalMinutes);
 
     console.log(absoluteMinutes, "Minutes");
+    data.minutes = absoluteMinutes;
 
     // Seconds
     const absoluteSeconds = Math.ceil(
@@ -189,5 +192,7 @@ getAllVideos()
     );
 
     console.log(absoluteSeconds, "Seconds");
+    data.seconds = absoluteSeconds;
+
     console.timeEnd();
   });
