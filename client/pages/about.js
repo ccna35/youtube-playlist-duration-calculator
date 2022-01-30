@@ -13,11 +13,9 @@ const about = () => {
         <link rel="icon" href="/favicon.ico" />
         <title>YouTube Playlist Duration Calculator</title>
       </Head>
-      <Navbar />
       <main className={styles.main}>
         <h2>About page</h2>
       </main>
-      <Footer />
     </>
   );
 };
