@@ -9,10 +9,10 @@ const Navbar = () => {
       <div className={styles.container}>
         <div className={styles.navbar}>
           <div className={styles.title}>YT Playlist Duration Calculator</div>
-          <div className={styles.nav__menu}>
+          {/* <div className={styles.nav__menu}>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

@@ -157,7 +157,7 @@
 .navbar {
   padding: 1rem 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -193,12 +193,41 @@
   margin-bottom: 2rem;
 }
 
+.errorMsg {
+  padding: 5px 15px;
+  color: white;
+  background-color: #db222a;
+  border-radius: 5px;
+}
+.urlExample {
+  padding: 1rem;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+.urlExample p {
+  color: #333;
+}
+
+.results {
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
+.results span {
+  font-weight: 500;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
   }
   .form {
+    flex-direction: column;
+  }
+
+  .navbar {
     flex-direction: column;
   }
 }

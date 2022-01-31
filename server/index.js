@@ -11,9 +11,8 @@ app.use(cors());
 let data = {};
 
 const API_KEY = process.env.API_KEY;
-let playlistId = "PLDoPjvoNmBAzH72MTPuAAaYfReraNlQgM";
 
-app.get("/:id", (req, res, next) => {
+app.get("/:id", (req, res) => {
   res.send(data);
   playlistId = req.params.id;
   console.time();
@@ -37,6 +36,7 @@ const getAllVideos = async (playlistId) => {
     // if the playlist length is equal to or less than 50 it won't have a nextPageToken (undefined).
     while (nextPageToken !== undefined) {
       const response = await axios.get(API_URL);
+      data.numOfVideos = response.data.pageInfo.totalResults;
       nextPageToken = response.data.nextPageToken;
       response.data.items.map((item) => {
         videosIDs.push(item.contentDetails.videoId);
