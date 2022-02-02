@@ -10,8 +10,9 @@ const Navbar = () => {
         <div className={styles.navbar}>
           <Image
             src="/YT playlist calculator logo.svg"
-            width={107.484667 * 3}
-            height={34.2116667 * 3}
+            width={322.454001}
+            height={102.635}
+            alt="logo"
           />
         </div>
       </div>
