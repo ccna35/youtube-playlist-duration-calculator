@@ -174,3 +174,9 @@ const getPlaylistDuration = async (videosDurations) => {
   data.seconds = absoluteSeconds;
   console.timeEnd();
 };
+
+// Deploying to Heroku
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
