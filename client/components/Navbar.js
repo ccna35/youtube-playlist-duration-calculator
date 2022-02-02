@@ -8,11 +8,11 @@ const Navbar = () => {
     <nav>
       <div className={styles.container}>
         <div className={styles.navbar}>
-          <div className={styles.title}>YT Playlist Duration Calculator</div>
-          {/* <div className={styles.nav__menu}>
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-          </div> */}
+          <Image
+            src="/YT playlist calculator logo.svg"
+            width={107.484667 * 3}
+            height={34.2116667 * 3}
+          />
         </div>
       </div>
     </nav>

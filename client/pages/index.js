@@ -84,19 +84,13 @@ export default function Home() {
 
                 <p>
                   <span>Total length of playlist :</span>{" "}
-                  {data.days !== 0 && data.days}
-                  Days, {data.hours} Hours, {data.minutes} Minutes,{" "}
-                  {data.seconds} Seconds
+                  {data.days !== 0 && <>{data.days} days, </>}
+                  {data.hours} hours, {data.minutes} minutes, {data.seconds}{" "}
+                  seconds
                 </p>
               </div>
             )}
           </div>
-          {/* <div>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente
-            totam doloribus, ex adipisci nam animi debitis odio, pariatur
-            necessitatibus eligendi doloremque commodi minima repudiandae
-            expedita ab quas aperiam! Non, incidunt.
-          </div> */}
         </div>
       </main>
     </>
