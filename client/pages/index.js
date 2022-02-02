@@ -27,7 +27,9 @@ export default function Home() {
       let newPlaylistID = playlistID.match(playlistID_Regex)[0];
 
       try {
-        const res = await fetch(`/${newPlaylistID}`);
+        const res = await fetch(
+          `https://ytplaylistserveroriginal.herokuapp.com/${newPlaylistID}`
+        );
         const json = await res.json();
         setData(json);
         setPlaylistID("");
