@@ -1,14 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
 export default function Home() {
   const [playlistID, setPlaylistID] = useState("");
   const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   // After the user submits the form we must check if the input is valid.
@@ -20,6 +17,7 @@ export default function Home() {
 
   const getPlaylistDuration = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setData({});
     setError("");
     // Check if the input content matches this regex expression or not.
@@ -27,6 +25,7 @@ export default function Home() {
       let newPlaylistID = playlistID.match(playlistID_Regex)[0];
 
       try {
+        // const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
         const res = await fetch(
           `https://ytplaylistserveroriginal.herokuapp.com/${newPlaylistID}`
         );
@@ -76,7 +75,7 @@ export default function Home() {
           {error && <p className={styles.errorMsg}>{error}</p>}
           <div className={styles.playlistData}>
             {loading ? (
-              ""
+              "Loading..."
             ) : (
               <div className={styles.results}>
                 <p>

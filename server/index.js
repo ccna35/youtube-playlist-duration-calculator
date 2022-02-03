@@ -8,18 +8,31 @@ const app = express();
 
 app.use(cors());
 
+const corsOptions = {
+  origin: [
+    "https://youtube-playlist-duration-calculator.vercel.app",
+    "http://localhost:3000/",
+  ],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+
 let data = {};
 
 const API_KEY = process.env.API_KEY;
 
 app.get("/:id", (req, res) => {
-  res.send(data);
   playlistId = req.params.id;
   console.time();
 
   getAllVideos(playlistId)
     .then((videosIDs) => getTotalDuration(videosIDs))
-    .then((videosDurations) => getPlaylistDuration(videosDurations));
+    .then((videosDurations) => getPlaylistDuration(videosDurations))
+    .then(() => {
+      res.send(data);
+      console.log(data);
+    });
 });
 
 app.listen(process.env.PORT || 8080, () => {
@@ -85,8 +98,6 @@ const getTotalDuration = async (videosIDs) => {
         increment = videosIDs.length;
       }
       try {
-        // 0, 50
-        // 50, 100
         // 100, 128
         let API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videosIDs
           .slice(start, increment)
@@ -174,9 +185,3 @@ const getPlaylistDuration = async (videosDurations) => {
   data.seconds = absoluteSeconds;
   console.timeEnd();
 };
-
-// Deploying to Heroku
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
