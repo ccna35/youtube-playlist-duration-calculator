@@ -11,8 +11,8 @@ export default function Home() {
   // After the user submits the form we must check if the input is valid.
   const inputRegex =
     /(https:\/\/www\.youtube\.com\/playlist\?list=|www\.youtube\.com\/playlist\?list=|youtube\.com\/playlist\?list=)(?<==)[a-zA-Z0-9-_]+/;
-  // This Regex expression filters out teh client side input & gets the playlist ID only.
 
+  // This Regex expression filters out the client side input & gets the playlist ID only.
   const playlistID_Regex = /(?<=\=)[a-zA-Z0-9-_]+/;
 
   const getPlaylistDuration = async (e) => {
