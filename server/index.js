@@ -10,7 +10,7 @@ app.use(cors());
 
 const corsOptions = {
   origin: [
-    "https://youtube-playlist-duration-calculator.vercel.app",
+    "https://yt-duration-calculator.vercel.app",
     "http://localhost:3000/",
   ],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204

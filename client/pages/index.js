@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Home() {
   const [playlistID, setPlaylistID] = useState("");
   const [data, setData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   // After the user submits the form we must check if the input is valid.
