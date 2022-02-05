@@ -75,7 +75,7 @@ export default function Home() {
           {error && <p className={styles.errorMsg}>{error}</p>}
           <div className={styles.playlistData}>
             {loading ? (
-              "Loading..."
+              ""
             ) : (
               <div className={styles.results}>
                 <p>
@@ -91,6 +91,26 @@ export default function Home() {
                 </p>
               </div>
             )}
+          </div>
+          <div className={styles.info}>
+            <h2>
+              How to find the total length or duration of any YouTube playlist?
+            </h2>
+            <p>
+              We know how hard it is to get the full length or duration of a
+              YouTube's playlist, sometimes it's even harder when it contains
+              over 10 or even 100 videos! That's why we created this
+              <span> YouTube Playlist Duration Calculator </span> just enter the
+              URL or link of the YouTube playlist and then press Enter or just
+              click the button right next to it and in a matter of milliseconds
+              you're going get a lot of information about that playlist,
+              information like:
+            </p>
+            <ul>
+              <li>The number of all videos</li>
+              <li>Total duration of the playlist</li>
+              <li>Average duration of each video</li>
+            </ul>
           </div>
         </div>
       </main>
