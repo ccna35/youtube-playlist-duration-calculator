@@ -61,7 +61,7 @@ export default function Home() {
           <div className={styles.urlExample}>
             <h2>The link of the playlist should be something like this...</h2>
             <p>
-              https://www.youtube.com/playlist?list=PLDoPjvoNmBAzjsz06gkzlSrlev53MGIKe
+              https://www.youtube.com/playlist?list=PLDoPjvoNmBAzjsz06gkzlSrlev53MGIKen
             </p>
           </div>
           <form
