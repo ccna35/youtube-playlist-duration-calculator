@@ -28,19 +28,20 @@ export default function Home() {
       let newPlaylistID = playlistID.match(playlistID_Regex)[0];
 
       try {
-        // const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
-        const res = await fetch(
-          `https://ytplaylistserveroriginal.herokuapp.com/${newPlaylistID}`
-        );
+        const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
+        // const res = await fetch(
+        //   `https://ytplaylistserveroriginal.herokuapp.com/${newPlaylistID}`
+        // );
         const json = await res.json();
         setData(json);
+        console.log(json);
         setPlaylistID("");
         setLoading(false);
       } catch (err) {
         console.log(err.message);
       }
     } else {
-      setError("Please check the URL of the playlist and submit again.");
+      setError("Please check the URL of the playlist and submit it again.");
     }
   };
 
@@ -101,6 +102,15 @@ export default function Home() {
                   {data.days !== 0 && <>{data.days} days, </>}
                   {data.hours} hours, {data.minutes} minutes, {data.seconds}{" "}
                   seconds
+                </p>
+
+                <p>
+                  <span>Average length of every video :</span>{" "}
+                  {data.average.days !== 0 && <>{data.average.days} days, </>}
+                  {data.average.hours !== 0 && (
+                    <>{data.average.hours} hours, </>
+                  )}
+                  {data.average.minutes} minutes, {data.average.seconds} seconds
                 </p>
               </div>
             )}

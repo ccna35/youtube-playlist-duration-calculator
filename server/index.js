@@ -43,6 +43,7 @@ const getAllVideos = async (playlistId) => {
   let API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
 
   let videosIDs = [];
+  let numOfVideos;
 
   let nextPageToken = "";
   try {
@@ -58,10 +59,10 @@ const getAllVideos = async (playlistId) => {
         API_URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&pageToken=${nextPageToken}&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
       }
     }
-    // console.log(videosIDs);
   } catch (err) {
     // Handle Error Here
     console.error(err);
+    // res.send(err.message);
   }
   return videosIDs;
 };
@@ -161,6 +162,7 @@ const getPlaylistDuration = async (videosDurations) => {
   const hoursToMin = sumOfHours * 60;
   const secToMin = sumOfSeconds / 60;
   const totalMinutes = sumOfMinutes + daysToMin + hoursToMin + secToMin;
+
   // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
   // Days
   const finalDays = totalMinutes / (24 * 60);
@@ -183,5 +185,32 @@ const getPlaylistDuration = async (videosDurations) => {
   );
   console.log(absoluteSeconds, "Seconds");
   data.seconds = absoluteSeconds;
+
+  // Function to get teh average length of every video
+  function average(totalMinutes) {
+    let average = {};
+    const averageMin = totalMinutes / data.numOfVideos;
+    // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
+    // Days
+    const finalDays = averageMin / (24 * 60);
+    const absoluteDays = Math.floor(finalDays);
+    average.days = absoluteDays;
+    // Hours
+    const finalHours = (finalDays - Math.floor(finalDays)) * 24;
+    const absoluteHours = Math.floor(finalHours);
+    average.hours = absoluteHours;
+    // Minutes
+    const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
+    const absoluteMinutes = Math.floor(finalMinutes);
+    average.minutes = absoluteMinutes;
+    // Seconds
+    const absoluteSeconds = Math.ceil(
+      (finalMinutes - Math.floor(finalMinutes)) * 60
+    );
+    average.seconds = absoluteSeconds;
+
+    data.average = average;
+  }
+  average(totalMinutes);
   console.timeEnd();
 };
