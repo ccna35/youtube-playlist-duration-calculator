@@ -34,7 +34,6 @@ export default function Home() {
         );
         const json = await res.json();
         setData(json);
-        console.log(json);
         setPlaylistID("");
         setLoading(false);
       } catch (err) {
