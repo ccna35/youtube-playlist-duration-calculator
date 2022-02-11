@@ -216,13 +216,27 @@ const getPlaylistDuration = async (videosDurations) => {
 
   function divideLength(divValue) {
     let speededTimeObject = {};
-
+    let minByDivValue;
     // First we divide total minutes by the divValue.
     // divValue represents the number used in division.
-    const minBy125 = totalMinutes / divValue;
+
+    switch (divValue) {
+      case 125:
+        minByDivValue = totalMinutes / 1.25;
+        break;
+      case 150:
+        minByDivValue = totalMinutes / 1.5;
+        break;
+      case 175:
+        minByDivValue = totalMinutes / 1.75;
+        break;
+      case 2:
+        minByDivValue = totalMinutes / 2;
+        break;
+    }
     // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
     // Days
-    const finalDays = minBy125 / (24 * 60);
+    const finalDays = minByDivValue / (24 * 60);
     const absoluteDays = Math.floor(finalDays);
     // Hours
     const finalHours = (finalDays - Math.floor(finalDays)) * 24;
@@ -241,7 +255,7 @@ const getPlaylistDuration = async (videosDurations) => {
 
     switch (divValue) {
       case 125:
-        data.at2x = speededTimeObject;
+        data.at125x = speededTimeObject;
         break;
       case 150:
         data.at150x = speededTimeObject;
