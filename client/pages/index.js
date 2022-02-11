@@ -92,7 +92,7 @@ export default function Home() {
             ) : (
               <div className={styles.results}>
                 <p>
-                  <span>No of videos : </span>
+                  <span>Number of videos : </span>
                   {data.numOfVideos}
                 </p>
 
