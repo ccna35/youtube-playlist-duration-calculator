@@ -111,6 +111,58 @@ export default function Home() {
                   )}
                   {data.average.minutes} minutes, {data.average.seconds} seconds
                 </p>
+
+                <p>
+                  <span>At 1.25x :</span>{" "}
+                  {data.at125x.days !== 0 && <>{data.at125x.days} days, </>}
+                  {data.at125x.hours !== 0 && <>{data.at125x.hours} hours, </>}
+                  {data.at125x.minutes !== 0 && (
+                    <>{data.at125x.minutes} minutes, </>
+                  )}
+                  ,
+                  {data.at125x.seconds !== 0 && (
+                    <>{data.at125x.seconds} seconds, </>
+                  )}
+                </p>
+
+                <p>
+                  <span>At 1.5x :</span>{" "}
+                  {data.at150x.days !== 0 && <>{data.at150x.days} days, </>}
+                  {data.at150x.hours !== 0 && <>{data.at150x.hours} hours, </>}
+                  {data.at150x.minutes !== 0 && (
+                    <>{data.at150x.minutes} minutes, </>
+                  )}
+                  ,
+                  {data.at150x.seconds !== 0 && (
+                    <>{data.at150x.seconds} seconds, </>
+                  )}
+                </p>
+
+                <p>
+                  <span>At 1.75x :</span>{" "}
+                  {data.at175x.days !== 0 && <>{data.at175x.days} days, </>}
+                  {data.at175x.hours !== 0 && <>{data.at175x.hours} hours, </>}
+                  {data.at175x.minutes !== 0 && (
+                    <>{data.at175x.minutes} minutes, </>
+                  )}
+                  ,
+                  {data.at175x.seconds !== 0 && (
+                    <>{data.at175x.seconds} seconds, </>
+                  )}
+                </p>
+
+                <p>
+                  <span>At 2.00x :</span>{" "}
+                  {data.at2x.days !== 0 && <>{data.at2x.days} days, </>}
+                  {data.at2x.hours !== 0 && <>{data.at2x.hours} hours, </>}
+                  {data.at2x.minutes !== 0 && (
+                    <>{data.at2x.minutes} minutes, </>
+                  )}
+                  ,
+                  {data.at2x.seconds !== 0 && (
+                    <>{data.at2x.seconds} seconds, </>
+                  )}
+                </p>
               </div>
             )}
           </div>
@@ -132,6 +184,10 @@ export default function Home() {
               <li>The number of all videos</li>
               <li>Total duration of the playlist</li>
               <li>Average duration of each video</li>
+              <li>
+                Total duration of the playlist if you watch it on 1.25x, 1.5x ,
+                1.75x or 2.00x the speed.
+              </li>
             </ul>
           </div>
         </div>

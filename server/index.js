@@ -32,7 +32,8 @@ app.get("/:id", (req, res) => {
     .then(() => {
       res.send(data);
       console.log(data);
-    });
+    })
+    .catch((err) => res.send(err));
 });
 
 app.listen(process.env.PORT || 8080, () => {
@@ -61,7 +62,7 @@ const getAllVideos = async (playlistId) => {
     }
   } catch (err) {
     // Handle Error Here
-    console.error(err);
+    console.error(err.response.status);
     // res.send(err.message);
   }
   return videosIDs;
@@ -212,5 +213,118 @@ const getPlaylistDuration = async (videosDurations) => {
     data.average = average;
   }
   average(totalMinutes);
+
+  function at125x(totalMinutes) {
+    let at125x = {};
+
+    // First we divide total minutes by 1.25
+    const minBy125 = totalMinutes / 1.25;
+    // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
+    // Days
+    const finalDays = minBy125 / (24 * 60);
+    const absoluteDays = Math.floor(finalDays);
+    at125x.days = absoluteDays;
+    // Hours
+    const finalHours = (finalDays - Math.floor(finalDays)) * 24;
+    const absoluteHours = Math.floor(finalHours);
+    at125x.hours = absoluteHours;
+    // Minutes
+    const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
+    const absoluteMinutes = Math.floor(finalMinutes);
+    at125x.minutes = absoluteMinutes;
+    // Seconds
+    const absoluteSeconds = Math.ceil(
+      (finalMinutes - Math.floor(finalMinutes)) * 60
+    );
+    at125x.seconds = absoluteSeconds;
+
+    data.at125x = at125x;
+  }
+
+  function at150x(totalMinutes) {
+    let at150x = {};
+
+    // First we divide total minutes by 1.25
+    const minBy125 = totalMinutes / 1.5;
+    // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
+    // Days
+    const finalDays = minBy125 / (24 * 60);
+    const absoluteDays = Math.floor(finalDays);
+    at150x.days = absoluteDays;
+    // Hours
+    const finalHours = (finalDays - Math.floor(finalDays)) * 24;
+    const absoluteHours = Math.floor(finalHours);
+    at150x.hours = absoluteHours;
+    // Minutes
+    const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
+    const absoluteMinutes = Math.floor(finalMinutes);
+    at150x.minutes = absoluteMinutes;
+    // Seconds
+    const absoluteSeconds = Math.ceil(
+      (finalMinutes - Math.floor(finalMinutes)) * 60
+    );
+    at150x.seconds = absoluteSeconds;
+
+    data.at150x = at150x;
+  }
+
+  function at175x(totalMinutes) {
+    let at175x = {};
+
+    // First we divide total minutes by 1.25
+    const minBy125 = totalMinutes / 1.75;
+    // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
+    // Days
+    const finalDays = minBy125 / (24 * 60);
+    const absoluteDays = Math.floor(finalDays);
+    at175x.days = absoluteDays;
+    // Hours
+    const finalHours = (finalDays - Math.floor(finalDays)) * 24;
+    const absoluteHours = Math.floor(finalHours);
+    at175x.hours = absoluteHours;
+    // Minutes
+    const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
+    const absoluteMinutes = Math.floor(finalMinutes);
+    at175x.minutes = absoluteMinutes;
+    // Seconds
+    const absoluteSeconds = Math.ceil(
+      (finalMinutes - Math.floor(finalMinutes)) * 60
+    );
+    at175x.seconds = absoluteSeconds;
+
+    data.at175x = at175x;
+  }
+
+  function at2x(totalMinutes) {
+    let at2x = {};
+
+    // First we divide total minutes by 1.25
+    const minBy125 = totalMinutes / 2;
+    // Phase 2 => convert to teh final format => Days Hours Minutes Seconds.
+    // Days
+    const finalDays = minBy125 / (24 * 60);
+    const absoluteDays = Math.floor(finalDays);
+    at2x.days = absoluteDays;
+    // Hours
+    const finalHours = (finalDays - Math.floor(finalDays)) * 24;
+    const absoluteHours = Math.floor(finalHours);
+    at2x.hours = absoluteHours;
+    // Minutes
+    const finalMinutes = (finalHours - Math.floor(finalHours)) * 60;
+    const absoluteMinutes = Math.floor(finalMinutes);
+    at2x.minutes = absoluteMinutes;
+    // Seconds
+    const absoluteSeconds = Math.ceil(
+      (finalMinutes - Math.floor(finalMinutes)) * 60
+    );
+    at2x.seconds = absoluteSeconds;
+
+    data.at2x = at2x;
+  }
+
+  at125x(totalMinutes);
+  at150x(totalMinutes);
+  at175x(totalMinutes);
+  at2x(totalMinutes);
   console.timeEnd();
 };
