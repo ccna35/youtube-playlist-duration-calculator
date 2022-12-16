@@ -30,7 +30,7 @@ export default function Home() {
       try {
         // const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
         const res = await fetch(
-          `https://ytplaylistserveroriginal.herokuapp.com/${newPlaylistID}`
+          `https://youtube-playlist-server.onrender.com/${newPlaylistID}`
         );
         const json = await res.json();
         setData(json);
