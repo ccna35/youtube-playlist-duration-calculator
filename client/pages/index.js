@@ -26,13 +26,14 @@ export default function Home() {
     // Check if the input content matches this regex expression or not.
     if (playlistID.match(inputRegex)) {
       let newPlaylistID = playlistID.match(playlistID_Regex)[0];
-
+      console.log(newPlaylistID);
       try {
         // const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
         const res = await fetch(
           `https://youtube-playlist-server.onrender.com/${newPlaylistID}`
         );
         const json = await res.json();
+        console.log(json);
         setData(json);
         setPlaylistID("");
         setLoading(false);
