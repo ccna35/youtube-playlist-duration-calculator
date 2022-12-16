@@ -11,6 +11,7 @@ app.use(cors());
 const corsOptions = {
   origin: [
     "https://yt-duration-calculator.vercel.app",
+    "https://www.ytplaylistlengthcalculator.com/",
     "http://localhost:3000/",
   ],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
