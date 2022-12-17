@@ -38,7 +38,7 @@ app.get("/:id", (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });
 
 const getAllVideos = async (playlistId) => {
