@@ -27,10 +27,10 @@ export default function Home() {
     if (playlistID.match(inputRegex)) {
       let newPlaylistID = playlistID.match(playlistID_Regex)[0];
       try {
-        const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
-        // const res = await fetch(
-        //   `https://youtube-playlist-server.onrender.com/${newPlaylistID}`
-        // );
+        // const res = await fetch(`http://localhost:8080/${newPlaylistID}`);
+        const res = await fetch(
+          `https://youtube-playlist-server.onrender.com/${newPlaylistID}`
+        );
         const json = await res.json();
         setData(json);
         setPlaylistID("");
@@ -46,7 +46,6 @@ export default function Home() {
   return (
     <>
       <Head>
-        {/* <title>Create Next App</title> */}
         <meta
           name="description"
           content="
